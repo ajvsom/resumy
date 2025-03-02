@@ -57,7 +57,7 @@ def create_resume(config: Yaml,
 
     # Add Markdown filter to Jinja environment
     env.filters['markdown'] = markdown
-    )
+    
     try:
         template = env.get_template('theme.html')
     except jinja2.exceptions.TemplateNotFound as err:
