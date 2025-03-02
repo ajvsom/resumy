@@ -104,17 +104,14 @@
         <ul>
             {% for edu in education %}
             <li><b>{{ edu.area }}</b><br>
-                {{ edu.institution }}<br>
-                {% if edu.startDate %}
-                  {{ edu.startDate[:7] }} - {% if edu.endDate %}{{ edu.endDate[:7] }}{% else %}Present{% endif %}
-                {% endif %}
+                {{ edu.institution }}
             </li>
             {% endfor %}
         </ul>
     </div>
 </div>
 
-<!-- Experience Section with Proper Date Positioning -->
+<!-- Experience Section with Correct Date Format -->
 <h2>Experience</h2>
 <ul>
   {% for exp in work %}
@@ -123,7 +120,10 @@
       <div class="job-title">{{ exp.position }}</div>
       <div class="job-dates">
         {% if exp.startDate %}
-          {{ exp.startDate[:7] }} - {% if exp.endDate %}{{ exp.endDate[:7] }}{% else %}Present{% endif %}
+          {{ exp.startDate[:7] | replace('-', ' ') | replace('01', 'Jan') | replace('02', 'Feb') | replace('03', 'Mar') | replace('04', 'Apr') | replace('05', 'May') | replace('06', 'Jun') | replace('07', 'Jul') | replace('08', 'Aug') | replace('09', 'Sep') | replace('10', 'Oct') | replace('11', 'Nov') | replace('12', 'Dec') }}
+          - {% if exp.endDate %}
+          {{ exp.endDate[:7] | replace('-', ' ') | replace('01', 'Jan') | replace('02', 'Feb') | replace('03', 'Mar') | replace('04', 'Apr') | replace('05', 'May') | replace('06', 'Jun') | replace('07', 'Jul') | replace('08', 'Aug') | replace('09', 'Sep') | replace('10', 'Oct') | replace('11', 'Nov') | replace('12', 'Dec') }}
+          {% else %}Present{% endif %}
         {% endif %}
       </div>
     </div>
