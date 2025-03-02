@@ -98,7 +98,7 @@
         </div>
         <ul class="work-description">
             {% for desc_line in exp.highlights %}
-            <li>{{ desc_line }}</li>
+            <li>{{ desc_line | replace("**", "<b>") | replace("**", "</b>") | safe }}</li>
             {% endfor %}
         </ul>
     </li>
