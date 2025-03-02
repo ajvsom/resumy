@@ -43,6 +43,9 @@
     {% if basics.location %}
     <li><span class="icon icon-location-pin"></span>{{ basics.location.city }}{% if basics.location.countryCode %} ({{ basics.location.countryCode }}){% endif %}</li>
     {% endif %}
+    <!-- US Citizen Label -->
+    <li><span class="icon icon-flag"></span> US Citizen</li>
+
 </ul>
 
 {%- if meta and meta.breaks_before.skills -%}
