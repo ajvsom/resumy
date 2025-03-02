@@ -31,10 +31,10 @@
 }
 
 /* Add vertical border to separate columns */
-.column:not(:last-child) {
+/* .column:not(:last-child) {
     border-right: 1px solid #ccc;
     padding-right: 20px;
-}
+} */
 
 body {
     font-family: 'Roboto';
