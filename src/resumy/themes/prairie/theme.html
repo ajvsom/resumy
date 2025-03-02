@@ -7,152 +7,77 @@
   <meta name="Generator" content="Cocoa HTML Writer">
   <meta name="CocoaVersion" content="2487.5">
   <style type="text/css">
-    @import url('https://fonts.googleapis.com/css2?family=Arial:wght@400;700&display=swap');
-
-    body {
-        font-family: 'Arial', sans-serif;
-        font-size: 12px;
-        margin: 40px;
-        color: #000;
-    }
-    .header {
-        text-align: center;
-        border-bottom: 4px solid black;
-        padding-bottom: 10px;
-        margin-bottom: 20px;
-    }
-    .header h1 {
-        font-size: 28px;
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
-    .contact-info {
-        font-size: 12px;
-    }
-    .contact-info img {
-        height: 12px;
-        width: 12px;
-        margin-right: 5px;
-    }
-    .container {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-    .column {
-        width: 48%;
-        vertical-align: top;
-    }
-    h2 {
-        font-size: 18px;
-        margin-bottom: 10px;
-        border-bottom: 2px solid black;
-        padding-bottom: 5px;
-    }
-    ul {
-        list-style-type: disc;
-        padding-left: 20px;
-    }
-    .job-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-    }
-    .job-title {
-        font-weight: bold;
-        font-size: 14px;
-    }
-    .job-dates {
-        font-size: 12px;
-        text-align: right;
-        white-space: nowrap;
-    }
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000}
+    p.p3 {margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000}
+    p.p5 {margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000; min-height: 14.0px}
+    li.li1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000}
+    li.li4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; color: #0000e9; -webkit-text-stroke: #0000e9}
+    span.s1 {font-kerning: none}
+    span.s2 {text-decoration: underline; font-kerning: none}
+    span.s3 {text-decoration: underline; font-kerning: none; color: #0000e9; -webkit-text-stroke: 0px #0000e9}
+    span.s4 {-webkit-text-stroke: 0px #000000}
+    ul.ul1 {list-style-type: disc}
+    ul.ul2 {list-style-type: circle}
   </style>
 </head>
 <body>
+<p class="p1"><span class="s1">{%- macro format_str_date(str_date) -%} {{ strptime(str_date, '%Y-%m-%d').strftime('%b %Y') }} {%- endmacro -%} {%- macro format_date_range(exp) -%} {{ format_str_date(exp.startDate) }} - {% if exp.endDate %}{{ format_str_date(exp.endDate) }}{% else %}Present{% endif %} {%- endmacro -%}</span></p>
 
-<!-- Header Section with Contact Info -->
-<div class="header">
-    <h1>{{ basics.name }}</h1>
-    <div class="contact-info">
-        {% if basics.phone %}
-        <img src="https://img.icons8.com/ios-filled/50/000000/phone.png"/> {{ basics.phone }} |
-        {% endif %}
-        {% if basics.email %}
-        <img src="https://img.icons8.com/ios-filled/50/000000/email.png"/> <a href="mailto:{{ basics.email }}">{{ basics.email }}</a> |
-        {% endif %}
-        {% for profile in basics.profiles %}
-        <img src="https://img.icons8.com/ios-filled/50/000000/{{ profile.network|lower }}.png"/>
-        <a href="{{ profile.url }}">{{ profile.username }}</a> |
-        {% endfor %}
-    </div>
-</div>
+<h1 style="margin: 0.0px 0.0px 16.1px 0.0px; font: 24.0px Times; -webkit-text-stroke: #000000"><span class="s1"><b>{{ basics.name }}</b></span></h1>
 
-<!-- Two-column layout for Skills and Education -->
-<div class="container">
-    <div class="column">
-        <h2>Skills</h2>
-        <ul>
-            {% for skill in skills %}
-            <li><b>{{ skill.name }}</b>: {{ skill.keywords|join(', ') }}</li>
-            {% endfor %}
-        </ul>
-    </div>
+{% if basics.phone %}
+<ul class="ul1">
+  <li class="li1"><span class="s1">{{ basics.phone }}</span></li>
+</ul>
+{% endif %}
 
-    <div class="column">
-        <h2>Education</h2>
-        <ul>
-            {% for edu in education %}
-            <li><b>{{ edu.area }}</b><br>
-                {{ edu.institution }}
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-</div>
+{% if basics.email %}
+<ul class="ul1">
+  <li class="li4"><span class="s2"><a href="mailto:{{ basics.email }}">{{ basics.email }}</a></span></li>
+</ul>
+{% endif %}
 
-<!-- Experience Section with Correct Date Format -->
-<h2>Experience</h2>
-<ul>
-  {% for exp in work %}
-  <li>
-    <div class="job-container">
-      <div class="job-title">{{ exp.position }}</div>
-      <div class="job-dates">
-        {% if exp.startDate %}
-          {{ exp.startDate[:7] | replace('-', ' ') | replace('01', 'Jan') | replace('02', 'Feb') | replace('03', 'Mar') | replace('04', 'Apr') | replace('05', 'May') | replace('06', 'Jun') | replace('07', 'Jul') | replace('08', 'Aug') | replace('09', 'Sep') | replace('10', 'Oct') | replace('11', 'Nov') | replace('12', 'Dec') }}
-          - {% if exp.endDate %}
-          {{ exp.endDate[:7] | replace('-', ' ') | replace('01', 'Jan') | replace('02', 'Feb') | replace('03', 'Mar') | replace('04', 'Apr') | replace('05', 'May') | replace('06', 'Jun') | replace('07', 'Jul') | replace('08', 'Aug') | replace('09', 'Sep') | replace('10', 'Oct') | replace('11', 'Nov') | replace('12', 'Dec') }}
-          {% else %}Present{% endif %}
-        {% endif %}
-      </div>
-    </div>
-    <div>{{ exp.name }}</div>
-    <ul>
-      {% for desc_line in exp.highlights %}
-      <li>{{ desc_line }}</li>
-      {% endfor %}
-    </ul>
-  </li>
+{% for profile in basics.profiles %}
+<ul class="ul1">
+  <li class="li1"><span class="s1">
+    <a href="{{ profile.url }}">{{ profile.username }}</a>
+  </span></li>
+</ul>
+{% endfor %}
+
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Times; -webkit-text-stroke: #000000"><span class="s1"><b>Skills</b></span></h2>
+<ul class="ul1">
+  {% for skill in skills %}
+  <li class="li1"><span class="s4"></span><span class="s1">{{ skill.name }}: {{ skill.keywords|join(', ') }}</span></li>
   {% endfor %}
 </ul>
 
-<!-- Conditionally render Projects only if they exist -->
-{%- if projects and projects|length > 0 -%}
-<h2>Projects</h2>
-<ul>
-    {% for project in projects %}
-    <li><b>{{ project.name }}</b>: {{ project.description }}
-        {% if project.url %}
-        (<a href="{{ project.url }}">{{ project.url }}</a>)
-        {% endif %}
-        {% if project.keywords|length > 0 %}
-        ({{ project.keywords|join(', ') }})
-        {% endif %}
-    </li>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Times; -webkit-text-stroke: #000000"><span class="s1"><b>Experience</b></span></h2>
+<ul class="ul1">
+  {% for exp in work %}
+  <li class="li1"><span class="s4"></span><span class="s1"><b>{{ exp.position }}</b></span>
+    <br>
+    {% if exp.url %}<a href="{{ exp.url }}"><span class="s3">{{ exp.name }}</span></a>{% else %}{{ exp.name }}{% endif %}
+    <br>
+    {{ format_date_range(exp) }}
+    <br>
+  </li>
+  <ul class="ul2">
+    {% for desc_line in exp.highlights %}
+    <li class="li1"><span class="s1">{{ desc_line }}</span></li>
     {% endfor %}
+  </ul>
+  {% endfor %}
 </ul>
-{%- endif %}
+
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Times; -webkit-text-stroke: #000000"><span class="s1"><b>Education</b></span></h2>
+<ul class="ul1">
+  {% for edu in education %}
+  <li class="li1"><span class="s4"></span><span class="s1"><b>{{ edu.area }}</b></span><br>
+  {{ edu.institution }}
+  </li>
+  {% endfor %}
+</ul>
 
 </body>
 </html>
