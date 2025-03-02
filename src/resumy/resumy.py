@@ -5,6 +5,7 @@ import shutil
 import sys
 from datetime import datetime
 from typing import Any, Dict, cast
+from markdown import markdown
 
 import jinja2
 import yaml
@@ -52,7 +53,10 @@ def create_resume(config: Yaml,
                   metadata: DocumentMetadata) -> None:
     # 1. Retrieve theme
     env = jinja2.Environment(
-        loader=jinja2.FileSystemLoader(theme_path),
+    loader=jinja2.FileSystemLoader(theme_path),)
+
+    # Add Markdown filter to Jinja environment
+    env.filters['markdown'] = markdown
     )
     try:
         template = env.get_template('theme.html')
