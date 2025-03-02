@@ -72,7 +72,9 @@
             {% for edu in education %}
             <li><b>{{ edu.area }}</b><br>
                 {{ edu.institution }}<br>
-                {{ format_date_range(edu) }}
+                {% if edu.startDate %}
+                  {{ edu.startDate[:7] }} - {% if edu.endDate %}{{ edu.endDate[:7] }}{% else %}Present{% endif %}
+                {% endif %}
             </li>
             {% endfor %}
         </ul>
@@ -85,7 +87,9 @@
   <li>
     <b>{{ exp.position }}</b><br>
     {{ exp.name }}<br>
-    {{ format_date_range(exp) }}<br>
+    {% if edu.startDate %}
+      {{ edu.startDate[:7] }} - {% if edu.endDate %}{{ edu.endDate[:7] }}{% else %}Present{% endif %}
+    {% endif %} <br>
     <ul>
       {% for desc_line in exp.highlights %}
       <li>{{ desc_line }}</li>
