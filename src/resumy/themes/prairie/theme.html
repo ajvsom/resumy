@@ -87,8 +87,8 @@
   <li>
     <b>{{ exp.position }}</b><br>
     {{ exp.name }}<br>
-    {% if edu.startDate %}
-      {{ edu.startDate[:7] }} - {% if edu.endDate %}{{ edu.endDate[:7] }}{% else %}Present{% endif %}
+    {% if exp.startDate %}
+      {{ exp.startDate[:7] }} - {% if exp.endDate %}{{ exp.endDate[:7] }}{% else %}Present{% endif %}
     {% endif %} <br>
     <ul>
       {% for desc_line in exp.highlights %}
