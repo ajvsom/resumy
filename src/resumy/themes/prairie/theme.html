@@ -53,6 +53,20 @@
         list-style-type: disc;
         padding-left: 20px;
     }
+    .job-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+    }
+    .job-title {
+        font-weight: bold;
+        font-size: 14px;
+    }
+    .job-dates {
+        font-size: 12px;
+        text-align: right;
+        white-space: nowrap;
+    }
   </style>
 </head>
 <body>
@@ -100,15 +114,20 @@
     </div>
 </div>
 
+<!-- Experience Section with Proper Date Positioning -->
 <h2>Experience</h2>
 <ul>
   {% for exp in work %}
   <li>
-    <b>{{ exp.position }}</b><br>
-    {{ exp.name }}<br>
-    {% if exp.startDate %}
-      {{ exp.startDate[:7] }} - {% if exp.endDate %}{{ exp.endDate[:7] }}{% else %}Present{% endif %}
-    {% endif %} <br>
+    <div class="job-container">
+      <div class="job-title">{{ exp.position }}</div>
+      <div class="job-dates">
+        {% if exp.startDate %}
+          {{ exp.startDate[:7] }} - {% if exp.endDate %}{{ exp.endDate[:7] }}{% else %}Present{% endif %}
+        {% endif %}
+      </div>
+    </div>
+    <div>{{ exp.name }}</div>
     <ul>
       {% for desc_line in exp.highlights %}
       <li>{{ desc_line }}</li>
