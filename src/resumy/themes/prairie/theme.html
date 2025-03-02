@@ -7,9 +7,32 @@
   <meta name="Generator" content="Cocoa HTML Writer">
   <meta name="CocoaVersion" content="2487.5">
   <style type="text/css">
+    @import url('https://fonts.googleapis.com/css2?family=Arial:wght@400;700&display=swap');
+
     body {
-        font-family: "Times", serif;
+        font-family: 'Arial', sans-serif;
         font-size: 12px;
+        margin: 40px;
+        color: #000;
+    }
+    .header {
+        text-align: center;
+        border-bottom: 4px solid black;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+    .header h1 {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    .contact-info {
+        font-size: 12px;
+    }
+    .contact-info img {
+        height: 12px;
+        width: 12px;
+        margin-right: 5px;
     }
     .container {
         display: flex;
@@ -20,12 +43,11 @@
         width: 48%;
         vertical-align: top;
     }
-    h1 {
-        font-size: 24px;
-    }
     h2 {
         font-size: 18px;
         margin-bottom: 10px;
+        border-bottom: 2px solid black;
+        padding-bottom: 5px;
     }
     ul {
         list-style-type: disc;
@@ -35,25 +57,22 @@
 </head>
 <body>
 
-<h1>{{ basics.name }}</h1>
-
-{% if basics.phone %}
-<ul>
-  <li>{{ basics.phone }}</li>
-</ul>
-{% endif %}
-
-{% if basics.email %}
-<ul>
-  <li><a href="mailto:{{ basics.email }}">{{ basics.email }}</a></li>
-</ul>
-{% endif %}
-
-{% for profile in basics.profiles %}
-<ul>
-  <li><a href="{{ profile.url }}">{{ profile.username }}</a></li>
-</ul>
-{% endfor %}
+<!-- Header Section with Contact Info -->
+<div class="header">
+    <h1>{{ basics.name }}</h1>
+    <div class="contact-info">
+        {% if basics.phone %}
+        <img src="https://img.icons8.com/ios-filled/50/000000/phone.png"/> {{ basics.phone }} |
+        {% endif %}
+        {% if basics.email %}
+        <img src="https://img.icons8.com/ios-filled/50/000000/email.png"/> <a href="mailto:{{ basics.email }}">{{ basics.email }}</a> |
+        {% endif %}
+        {% for profile in basics.profiles %}
+        <img src="https://img.icons8.com/ios-filled/50/000000/{{ profile.network|lower }}.png"/>
+        <a href="{{ profile.url }}">{{ profile.username }}</a> |
+        {% endfor %}
+    </div>
+</div>
 
 <!-- Two-column layout for Skills and Education -->
 <div class="container">
