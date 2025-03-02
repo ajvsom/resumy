@@ -49,12 +49,39 @@
 <p style="page-break-before: always"></p>
 {%- endif -%}
 
+<!-- Two-column layout for Skills and Education -->
+<div class="container">
+  <div class="column">
+      <h2>Skills</h2>
+      <ul class="keyval-list">
+          {% for skill in skills %}
+          <li><span class="key-title">{{ skill.name }}</span>: {{ skill.keywords|join(', ') }}</li>
+          {% endfor %}
+      </ul>
+  </div>
+
+  <div class="column">
+      <h2>Education</h2>
+      <ul class="work-list">
+          {% for exp in education %}
+          <li>
+              <div class="work-title">{{ exp.area }}</div>
+              <div class="work-subheader">
+                  <div class="work-company">{{ exp.institution }}</div>
+              </div>
+          </li>
+          {% endfor %}
+      </ul>
+  </div>
+</div>
+
+<!-- 
 <h2>Skills</h2>
 <ul class="keyval-list">
     {% for skill in skills %}
     <li><span class="key-title">{{ skill.name }}</span>: {{ skill.keywords|join(', ') }}</li>
     {% endfor %}
-</ul>
+</ul> -->
 
 {%- if meta and meta.breaks_before.work -%}
 <p style="page-break-before: always"></p>
@@ -78,16 +105,16 @@
     {% endfor %}
 </ul>
 
-{%- if meta and meta.breaks_before.projects -%}
+<!-- {%- if meta and meta.breaks_before.projects -%}
 <p style="page-break-before: always"></p>
-{%- endif -%}
+{%- endif -%} -->
 
 
-{%- if meta and meta.breaks_before.education -%}
+<!-- {%- if meta and meta.breaks_before.education -%}
 <p style="page-break-before: always"></p>
-{%- endif -%}
+{%- endif -%} -->
 
-<h2>Education</h2>
+<!-- <h2>Education</h2>
 <ul class="work-list">
     {% for exp in education %}
     <li>
@@ -97,4 +124,4 @@
         </div>
     </li>
     {% endfor %}
-</ul>
+</ul> -->
